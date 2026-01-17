@@ -8,7 +8,7 @@ public class File_Read {
     private static final String Delimiter = ",";
 
     public static void main(String[] args) throws Exception {
-        String filePath = "D:\\BankData.txt";
+        String filePath = "File\\BankData.txt";
         Map<String, List<String>> columnData = new HashMap<>();
 
         FileReader fr = new FileReader(filePath);
