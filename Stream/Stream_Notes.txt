@@ -1,0 +1,32 @@
+Java 8 Features:
+1. Lambda Expression
+2. Streams
+3. Date & Time API
+
+
+***************Lambda Expression******************
+    1. Anonymous Function
+    2. No name
+    3. No Return Type
+    4. No Access Modifier
+    5. (parameter) -> Exp/Block
+
+Functional Interface:
+    1. Only one abstract method
+    2. Can implement using Lambda Exp
+
+Abstract Method: 
+    1. Method declared without function body
+    2. Can only declared within Interfaces or Abstract Classes
+    3. These methods are intended to be overriden so cant be private
+
+Functional Programming:
+    1. Function can be stored in variable Eg. MathOperations sum = (a, b) -> a + b;
+    2. Function can be passed as argument to other function 
+
+****************Predicate***************************
+Functional Interface
+Boolean Valued Function
+Hold condition
+boolean test(T t);
+
