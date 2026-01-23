@@ -8,6 +8,7 @@ public class Consumer_Functional_Interface {
 
     public static void main(String[] args) {
 
+        // Accept one argument and returns no result
         Consumer<Integer> printInt = x -> System.out.println(x);
         printInt.accept(20);
 
