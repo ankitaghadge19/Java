@@ -26,7 +26,60 @@ Functional Programming:
 
 ****************Predicate***************************
 Functional Interface
+Aceept one argument and returns True/False
 Boolean Valued Function
 Hold condition
-boolean test(T t);
+-> boolean test(T t);
+
+****************Function*****************************
+Functional Interface
+Accept one argument and retruns the result
+-> R apply(T t);
+
+****************Consumer******************************
+Functional Interface
+Accept one argument and returns no result
+-> void accept(T t)
+
+****************Supplier******************************
+Functional Interface
+Does not accept any argumnet but returns the result
+-> T get();
+
+****************BiPredicate******************************
+Functional Interface
+Accepts two argumnets then perform operation then returns True/False
+-> boolean test(T t, U u);
+
+****************BiFunction******************************
+Functional Interface
+Accepts two argumnets then perform operation then returns result
+-> R applt(T t, U u);
+
+****************BiConsumer******************************
+Functional Interface
+Accepts two argumnets then perform operation then returns no result
+-> void accept(T t, U u);
+
+****************UnaryOperator******************************
+Extends Funcion Interafce
+No need of return type if same as input
+
+****************BinaryOpeartor******************************
+Extends Funcion Interafce
+Both arguments type and return type are same
+
+****************MethodReference******************************
+::
+Use method without invoking or calling method
+In place of Lambda Expression 
+Method is passed as an argument
+
+****************ConstructorReference******************************
+::
+Use constructor without invoking or calling it
+In place of Lambda Expression 
+Constructor is passed as an argument
+
+
 
