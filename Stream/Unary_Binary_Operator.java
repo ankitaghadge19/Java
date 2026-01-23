@@ -12,7 +12,7 @@ public class Unary_Binary_Operator {
         UnaryOperator<Integer> dual = x -> 2 * x;
         System.out.println(dual.apply(2));
 
-        // BinaryOperator -> Extends Function Interface (Both arguments and return type are same)
+        // BinaryOperator -> Extends Function Interface (Both arguments type and return type are same)
         BinaryOperator<Integer> sum = (x, y) -> x + y;
         System.out.println(sum.apply(2, 3));
     }
