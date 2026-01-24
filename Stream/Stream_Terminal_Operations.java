@@ -8,16 +8,23 @@ public class Stream_Terminal_Operations {
     public static void main(String[] args) {
         List<Integer> nums = List.of(1, 2, 3);
 
-        // 1. collect()
+        // 1. collect() -> Mutable List
         System.out.println(nums.stream().skip(0).collect(Collectors.toList()));
+        List<Integer> mutableNumsList = nums.stream().collect(Collectors.toList());
+        mutableNumsList.add(4);
         // Java 16 onwards: nums.stream().skip(0).toList();
+
+        // .toList()
+        List<Integer> immutableNumsList = nums.stream().toList();
+        immutableNumsList.add(5); // UnsupportedOperationException
 
         // 2. forEach()
         nums.stream().forEach(x -> System.out.println(x));
-        nums.forEach(System.out::println);
+        nums.forEach(System.out::println); // Method Referencing
 
         // 3. reduce() -> Combines elements to produce a single result
         Optional<Integer> sumOfAllNums = nums.stream().reduce((a, b) -> a + b);
+        // Optional<Integer> sumOfAllNums = nums.stream().reduce(Integer::sum);
         System.out.println(sumOfAllNums.get());
 
         // 4. count()
