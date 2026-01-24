@@ -7,11 +7,11 @@ import java.util.stream.Stream;
 
 public class Stream_Creation {
     public static void main(String[] args) {
-        //
 
         // 1. Using Collections
-        List<Integer> nums = Arrays.asList(1, 2, 3);
-        Stream<Integer> stream1 = nums.stream();
+        List<Integer> nums1 = Arrays.asList(1, 2, 3);
+        List<Integer> nums2 = List.of(3, 4, 5);
+        Stream<Integer> stream1 = nums1.stream();
 
         // 2. Using Arrays
         String[] fruits = {"Apple", "Banana", "Mango"};
