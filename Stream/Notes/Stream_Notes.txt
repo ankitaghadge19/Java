@@ -1,0 +1,62 @@
+******************************Java 8 Features******************************
+1. Lambda Expression
+2. Streams
+3. Date & Time API
+
+******************************Problem before Java 8******************************
+1. Too much boilerplate code
+2. Lots of for-Loops
+3. Hard to read and maintain
+4. Prallel processing
+
+******************************Streams_Features******************************
+Java 8 Feature
+Sequence of elements
+Use to process collections(List, Set, Array) in simpler way(No Loops, No If-Else)
+Its not a data structure, does not store data
+Do not modify original data, create new processed result
+Built support for parallel execution
+Source -> Intermediate -> Terminal
+
+******************************Stream Creation******************************
+1. Using collections
+2. Using Arrays
+3. Using Stream.of()
+4. Infinite Streams:
+    1. generate()
+            Generates values independently
+            Uses a Supplier
+            Use limit() to Stop
+            Eg. Print Hello 10 times
+    2. iterate()
+            Generates values based on previous value
+            Uses UnaryOperator
+            Needs starting value
+            Use limit() to Stop
+            Eg. Print 1 to 100
+
+*****************************Intermediate Operations******************************
+1. filter() -> Predicate
+2. map() -> Function
+3. sorted() -> Comparator (Natural Order)
+4. distinct() -> .equals()/hashCode()
+5. limit()
+6. skip()
+
+*****************************Terminal Operations******************************
+Short-Circuit Operations
+1. collect() -> Collector, Mutable
+2. toList() -> (Java 16+), Unmodifiable List, Immutable
+3. forEach() -> Consumer
+
+.get() -> (If a value is present, returns the value, otherwise throws NoSuchElementException)
+        4. reduce() -> Binary Operator, Reduce elements into single value
+        5. findFirst()
+        6. findAny()
+
+7. count() -> 
+8. anyMatch() -> Predicate (Boolean)
+9. allMatch() -> Predicate (Boolean)
+10. noneMatch() -> Predicate (Boolean)
+
+
