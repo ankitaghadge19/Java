@@ -8,25 +8,41 @@ public class Stream_Intermediate_Operations {
         List<String> names = List.of("El", "Mike", "Max", "Lucas", "Max");
 
         // 1. filter() -> (Predicate - Hold Condition)
-        Stream<String> startsWithM = names.stream().filter(x -> x.startsWith("M"));
+        Stream<String> startsWithM = names.stream()
+                .filter(x -> x.startsWith("M"));
         System.out.println(startsWithM.count());
 
-        // 2. map() -> Transform stream into another stream
-        Stream<String> convertToUpperCase = names.stream().map(x -> x.toUpperCase());
+        // 2. map() -> Transform stream into another stream (Function)
+        Stream<String> convertToUpperCase = names.stream()
+                .map(x -> x.toUpperCase());
+        System.out.println(convertToUpperCase.toList());
 
-        // 3. sorted()
+        // 3. sorted()  
         Stream<String> sortedNames = names.stream().sorted();
-        Stream<String> sortUsingCustomComparator = names.stream().sorted((a, b) -> a.length() - b.length());
 
-        // 4. distinct()
-        long noOfUniqueNamesStartsWithM = names.stream().filter(x -> x.startsWith("M")).distinct().count();
-        names.stream().filter(x -> x.startsWith("M")).distinct().forEach(x -> System.out.println(x));
+        Stream<String> sortUsingCustomComparator = names.stream()
+                .sorted((a, b) -> a.length() - b.length());
+
+        // 4. distinct() -> internally uses equals() and hashCode() (HashSet)
+        long noOfUniqueNamesStartsWithM = names.stream()
+                .filter(x -> x.startsWith("M"))
+                .distinct()
+                .count();
+        
+        names.stream()
+                .filter(x -> x.startsWith("M"))
+                .distinct()
+                .forEach(x -> System.out.println(x));
 
         // 5. limit()
-        Stream<Integer> oneToFifty = Stream.iterate(1, x -> x + 1).limit(50);
+        Stream<Integer> oneToFifty = Stream.iterate(1, x -> x + 1)
+                .limit(50);
 
         // 6. skip()
-        Stream<Integer> elevenToFifty = Stream.iterate(1, x -> x + 1).skip(10).limit(50);
+        Stream<Integer> elevenToFifty = Stream.iterate(1, x -> x + 1)
+                .skip(10)
+                .limit(50);
+
         System.out.println(elevenToFifty.count());
     }
 }
