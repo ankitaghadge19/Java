@@ -18,24 +18,25 @@ public class Stream_Terminal_Operations {
         List<Integer> immutableNumsList = nums.stream().toList();
         immutableNumsList.add(5); // UnsupportedOperationException
 
-        // 2. forEach()
+        // 2. forEach() -> (Stateless Operations) 
         nums.stream().forEach(x -> System.out.println(x));
         nums.forEach(System.out::println); // Method Referencing
 
-        // 3. reduce() -> Combines elements to produce a single result
+        // 3. reduce() -> Combines elements to produce a single result (Stateful Operations) 
         Optional<Integer> sumOfAllNums = nums.stream().reduce((a, b) -> a + b);
         // Optional<Integer> sumOfAllNums = nums.stream().reduce(Integer::sum);
         System.out.println(sumOfAllNums.get());
 
-        // 4. count()
+        // 4. count() -> (Stateful Operations) 
         System.out.println(nums.stream().filter(x -> x % 2 == 0).count());
+        System.out.println(nums.stream().filter(x -> x % 2 == 0).findAny());
 
-        // 5. anyMatch(), allMatch(), noneMatch()
+        // 5. anyMatch(), allMatch(), noneMatch() -> (Stateless Operations) 
         boolean isAnyEvenNum = nums.stream().anyMatch(x -> x % 2 == 0);
         boolean isAllNumGreaterThanZero = nums.stream().allMatch(x -> x > 0);
         boolean isAnyNumLessThanZero = nums.stream().noneMatch(x -> x < 0);
 
-        // 8. findFirst() / findAny()
+        // 8. findFirst() / findAny() -> (Stateless Operations) 
         System.out.println(nums.stream().findFirst().get());
         System.out.println(nums.stream().findAny().get());
     }
