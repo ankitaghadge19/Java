@@ -42,6 +42,7 @@ Source -> Intermediate -> Terminal
 4. distinct() -> .equals()/hashCode()
 5. limit()
 6. skip()
+7. peek()
 
 *****************************Terminal Operations******************************
 Short-Circuit Operations
@@ -58,5 +59,54 @@ Short-Circuit Operations
 8. anyMatch() -> Predicate (Boolean)
 9. allMatch() -> Predicate (Boolean)
 10. noneMatch() -> Predicate (Boolean)
+11. peek() -> Consumer
+
+******************************Parallel & Sequential Stream*********************************************
+-> Parallel Stream: parallelStream() (Multiple Threads)
+Allowing multiple threads to process the parts of stream concurrently
+Workload is distibuted across multiple threads
+Use When: CPU-Intensive operations, Large data sets, Independent operations
+Order not gauranted
+Eg. Find Factorial of Number
+
+-> Stream: stream() (Single Thread)
+Create sequeantial stream(default)
+Process elements one by one
+Order is preseved
+Eg. Cumulative Sum
+
+-> Sequential Stream: Sequential() (Single Thread)
+Forces Stream to Run Sequentially
+Eg. Parllel Stream (Find Factorial of Nums) -> Parallel To Sequential -> Find Cumulative Sum of all Factorila Values 
+
+***************************Stateful & Stateless Operations***********************************************
+-> Stateless:
+filter()
+map()
+forEach()
+anyMatch()
+noneMatch()
+allMatch()
+findFirst()
+findAny()
+peek()
+
+-> Stateful:
+
+If an operation must remeber:
+1. Elements seen so far, or
+2. An accumulated result
+
+distinct()
+sorted()
+limit()
+skip()
+reduce()
+count()
+collect()
+toList()
+
+
+
 
 
