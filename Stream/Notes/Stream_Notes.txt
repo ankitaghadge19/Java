@@ -60,6 +60,9 @@ Short-Circuit Operations
 9. allMatch() -> Predicate (Boolean)
 10. noneMatch() -> Predicate (Boolean)
 11. peek() -> Consumer
+12. min() -> Comparator.naturalOrder()
+13. max() -> Comparator.naturalOrder()
+14. flatMap() -> Function
 
 ******************************Parallel & Sequential Stream*********************************************
 -> Parallel Stream: parallelStream() (Multiple Threads)
@@ -81,6 +84,7 @@ Eg. Parllel Stream (Find Factorial of Nums) -> Parallel To Sequential -> Find Cu
 
 ***************************Stateful & Stateless Operations***********************************************
 -> Stateless:
+
 filter()
 map()
 forEach()
@@ -90,6 +94,7 @@ allMatch()
 findFirst()
 findAny()
 peek()
+flatMap()
 
 -> Stateful:
 
@@ -106,7 +111,25 @@ count()
 collect()
 toList()
 
+*******************************map() VS mapToInt()****************************************************
 
+-> Stream<T> (Object)
+Intermediatory Operations: map() 
+Terminal Operations: .toList(), .collect()
+( Stream<String> -> Stream<Integer> -> List<Integer> )
 
+-> IntStream / LongStream / DoubleStream
+Intermediatory Operations: mapToInt(), mapToLong(), mapToDouble
+Terminal Operations: .toArray(), .sum(), .average()
+( Stream<String> -> InStream -> int[] )
 
+map() -> conatains boxed objects
+mapToInt() -> contains primitives
 
+Java stream never do boxing/unboxing silently.
+Crossing between object and primitive streams must be explicit.
+
+Boxing:    Raw -> Object, eg. int -> Integer
+Unboxing:  Object -> Raw, eg. Integer -> int
+
+split() -> Returns String[]
