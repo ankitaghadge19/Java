@@ -8,6 +8,10 @@ public class Stream_Examples {
         // List<String> names = Arrays.asList("Max", "El", "Joyce", "Mike");
         List<String> names = List.of("Max", "El", "Joyce", "Mike");
 
+        // Print Names
+        System.out.println(names.stream().toList());
+        names.stream().forEach(x -> System.out.println(x));
+
         // Filter and Collect Names with Length > 3
         System.out.println(names.stream().filter(x -> x.length() > 3).toList());
         System.out.println(names.stream().filter(x -> x.length() > 3).count());
@@ -29,16 +33,24 @@ public class Stream_Examples {
                 .limit(50)
                 .toList();
         long sum = oneToFifty.parallelStream()
-                .mapToLong(x -> factorial(x))  // Returns Stream <Long>
+                .mapToLong(x -> factorial(x)) // Returns Stream <Long>
                 .sum();
         System.out.println(sum);
-        
 
         // Why .mapToLong() ?
         // Stream<T> does not have .sum()
         // T = Any reference (Object) type
-        // If type is not specify then Java dont know how to sum objects (Eg. How to sum Stream<String>)
-        // So need to explicitly convert into numeric data type (IntStream, LongStream, or DoubleStream)
+        // If type is not specify then Java dont know how to sum objects (Eg. How to sum
+        // Stream<String>)
+        // So need to explicitly convert into numeric data type (IntStream, LongStream,
+        // or DoubleStream)
+
+        // Filter Bank Names which contains China
+        List<String> bankNames = List.of("Agriculture Bank Of China", "Bank Of China", "HDFC Bank");
+        System.out.println(bankNames.stream()
+                .map(x -> x.toUpperCase())
+                .filter(x -> x.contains("CHINA"))
+                .toList());
     }
 
     private static long factorial(int n) {
