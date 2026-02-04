@@ -1,6 +1,9 @@
 package Stream;
 
+import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class Stream_Intermediate_Operations {
@@ -60,6 +63,36 @@ public class Stream_Intermediate_Operations {
                                 .filter(x -> x.length() <= 10)
                                 .peek(x -> System.out.println(x))
                                 .count();
-                System.out.println(filteredBankNames);          
+                System.out.println(filteredBankNames);
+      
+                // 9. flatMap()
+                // [rc1, [rc2, rc3]] -> [rc1, rc2, rc3]
+                // Flaten elements into single stream (One Level)
+                // Nested Collections Eg. List<List<String>>
+                ReturnCode rCSelectedOnUI = new ReturnCode("1", "Code 1", "Description 1");
+
+                ReturnCode rc1 = new ReturnCode("1", "Code 1", "Description 1");
+                ReturnCode rc2 = new ReturnCode("2", "Code 2", "Description 2");
+                ReturnCode rc3 = new ReturnCode("3", "Code 3", "Description 3");
+
+                Map<String, LinkedHashSet<ReturnCode>> filedReturnCodeList = new HashMap<>();
+                filedReturnCodeList.put("cdtr", new LinkedHashSet<>(List.of(rc1)));
+                filedReturnCodeList.put("intrmy", new LinkedHashSet<>(List.of(rc2, rc3)));
+
+                // Problem Statement: Return Code with ID = 1 applied to the payment?
+                boolean matchFound = filedReturnCodeList.values()
+                                .stream() // [ rc1, [rc2, rc3]]
+                                .flatMap(x -> x.stream())
+                                .anyMatch(rc -> rc.getId().equals(rCSelectedOnUI.getId()));
+                System.out.println("Is ReturnCode already applied to payment: " + matchFound);
+
+                // Multiple orders and each order has multiple items
+                List<List<String>> orders = List.of(
+                        List.of("Mouse", "Keyboard"),
+                        List.of("Mic", "Laptop Stand")
+                );
+                List<String> allItems = orders.stream()
+                                .flatMap(x -> x.stream())
+                                .toList();
         }
 }
