@@ -43,26 +43,25 @@ Source -> Intermediate -> Terminal
 5. limit()
 6. skip()
 7. peek()
+8. flatMap() -> Function
 
 *****************************Terminal Operations******************************
-Short-Circuit Operations
+
 1. collect() -> Collector, Mutable
 2. toList() -> (Java 16+), Unmodifiable List, Immutable
 3. forEach() -> Consumer
 
 .get() -> (If a value is present, returns the value, otherwise throws NoSuchElementException)
         4. reduce() -> Binary Operator, Reduce elements into single value
-        5. findFirst()
-        6. findAny()
+        5. findFirst() -> Short-Circuit Operations
+        6. findAny() -> Short-Circuit Operations
 
 7. count() -> 
-8. anyMatch() -> Predicate (Boolean)
-9. allMatch() -> Predicate (Boolean)
-10. noneMatch() -> Predicate (Boolean)
-11. peek() -> Consumer
-12. min() -> Comparator.naturalOrder()
-13. max() -> Comparator.naturalOrder()
-14. flatMap() -> Function
+8. anyMatch() -> Predicate (Boolean), Short-Circuit Operations
+9. allMatch() -> Predicate (Boolean), Short-Circuit Operations
+10. noneMatch() -> Predicate (Boolean), Short-Circuit Operations
+11. min() -> Comparator.naturalOrder()
+12. max() -> Comparator.naturalOrder()
 
 ******************************Parallel & Sequential Stream*********************************************
 -> Parallel Stream: parallelStream() (Multiple Threads)
