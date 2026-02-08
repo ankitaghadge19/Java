@@ -132,3 +132,12 @@ Boxing:    Raw -> Object, eg. int -> Integer
 Unboxing:  Object -> Raw, eg. Integer -> int
 
 split() -> Returns String[]
+
+****************************************Note*****************************************************************
+
+-> Stream cannot be resued after terminal operation has been called
+IllegalStateException: stream has already been operated upon or closed
+
+*************************************forEachOrdered()*********************************************************
+toList(), forEachOrdered() -> Maintains Order
+forEach() -> Doest Not Maintain Order
