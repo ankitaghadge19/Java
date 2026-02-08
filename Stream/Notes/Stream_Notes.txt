@@ -139,5 +139,18 @@ split() -> Returns String[]
 IllegalStateException: stream has already been operated upon or closed
 
 *************************************forEachOrdered()*********************************************************
+parallelStream():
 toList(), forEachOrdered() -> Maintains Order
 forEach() -> Doest Not Maintain Order
+
+*******************************Collectors Utility Class**********************************************
+
+Collectors.toList()
+Collectors.toSet()
+Collectors.toCollection(LinkedHashSet::new)
+Collectors.joining(delimiter:" ")
+
+Map<String, String> map = new HashMap<>(); -> Mutable
+Map<String, String> map = Map.of(); -> Immutable, Map.of() does not guarantee order
+
+
