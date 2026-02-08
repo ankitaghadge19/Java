@@ -7,9 +7,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Stream_Terminal_Operations {
+public class Stream_Terminal_Operations extends Parallel_Streams {
     public static void main(String[] args) {
-        List<Integer> nums = List.of(1, 2, 3);
+        List<Integer> nums = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
         // 1. collect() -> Mutable List
         System.out.println(nums.stream().skip(0).collect(Collectors.toList()));
@@ -25,25 +25,36 @@ public class Stream_Terminal_Operations {
         nums.stream().forEach(x -> System.out.println(x));
         nums.forEach(System.out::println); // Method Referencing
 
-        // 3. reduce() -> Combines elements to produce a single result (Stateful Operations) 
+        // 3. forEachOrdered()
+        System.out.println("Print factorial values using forEach(): ");
+        nums.parallelStream()
+                .map(Parallel_Streams::factorial)
+                .forEach(x -> System.out.println(x));
+
+        System.out.println("Print factorial values using forEachOrdered(): ");
+        nums.parallelStream()
+                .map(x -> Parallel_Streams.factorial(x))
+                .forEachOrdered(x -> System.out.println(x));
+
+        // 4. reduce() -> Combines elements to produce a single result (Stateful Operations) 
         Optional<Integer> sumOfAllNums = nums.stream().reduce((a, b) -> a + b);
         // Optional<Integer> sumOfAllNums = nums.stream().reduce(Integer::sum);
         System.out.println(sumOfAllNums.get());
 
-        // 4. count() -> (Stateful Operations) 
+        // 5. count() -> (Stateful Operations) 
         System.out.println(nums.stream().filter(x -> x % 2 == 0).count());
         System.out.println(nums.stream().filter(x -> x % 2 == 0).findAny());
 
-        // 5. anyMatch(), allMatch(), noneMatch() -> (Stateless Operations) 
+        // 6. anyMatch(), allMatch(), noneMatch() -> (Stateless Operations) 
         boolean isAnyEvenNum = nums.stream().anyMatch(x -> x % 2 == 0);
         boolean isAllNumGreaterThanZero = nums.stream().allMatch(x -> x > 0);
         boolean isAnyNumLessThanZero = nums.stream().noneMatch(x -> x < 0);
 
-        // 8. findFirst() / findAny() -> (Stateless Operations) 
+        // 7. findFirst() / findAny() -> (Stateless Operations) 
         System.out.println(nums.stream().findFirst().get());
         System.out.println(nums.stream().findAny().get());
 
-        // 9. toArray()
+        // 8. toArray()
         String lengths = "2, 4";
         // split() -> Returns String[]
         // Arrays.stream(String[])
@@ -66,19 +77,19 @@ public class Stream_Terminal_Operations {
         String pattern = "abcab";
         char[] chars = pattern.toCharArray();
 
-        // 10. max()
+        // 9. max()
         int maxNum = nums.stream().max((a, b) -> a - b).get();
         System.out.println("Max: " + maxNum);
 
-        // 11. min()
+        // 10. min()
         int minNum = nums.stream().min(Comparator.naturalOrder()).get();
         // int minNum = nums.stream().min((a, b) -> b - a).get();
         System.out.println("Min: " + minNum);
 
-        // 12. Stream cannot be resued after terminal operation has been called
+        // Note: Stream cannot be resued after terminal operation has been called
         List<String> names = List.of("Max", "Mike", "El");
         Stream<String> namesStream = names.stream();
         System.out.println(namesStream.toList());
-        List<String> uppercaseNames = namesStream.map(x -> x.toUpperCase()).toList();  // IllegalStateException: stream has already been operated upon or closed
+        // List<String> uppercaseNames = namesStream.map(x -> x.toUpperCase()).toList();  // IllegalStateException: stream has already been operated upon or closed
     }
 }
