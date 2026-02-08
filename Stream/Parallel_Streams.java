@@ -58,7 +58,7 @@ public class Parallel_Streams {
                 System.out.println("Cumulative Sum Using Parallel Stream: " + cumulativeSumUsingParallelStream);
         }
 
-        private static long factorial(int n) {
+        public static long factorial(int n) {
                 long result = 1;
                 for (int i = 2; i <= n; i++) {
                         result = result * i;
