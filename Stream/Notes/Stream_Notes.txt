@@ -153,4 +153,10 @@ Collectors.joining(delimiter:" ")
 Map<String, String> map = new HashMap<>(); -> Mutable
 Map<String, String> map = Map.of(); -> Immutable, Map.of() does not guarantee order
 
+summarizingInt(x -> x) -> Collector, Converts elements to int
+mapToInt() -> Stream<Integer> to IntStream(Primitive Stream)
 
+OptionalDounblr -> Stream may be empty
+max(), min(), average() -> In case of empty stream we cannot return 0, 
+                           As 0 might be actual valid vlaue in real data,
+                           So we return optional.
