@@ -154,6 +154,15 @@ Map<String, String> map = new HashMap<>(); -> Mutable
 Map<String, String> map = Map.of(); -> Immutable, Map.of() does not guarantee order
 
 summarizingInt(x -> x) -> Collector, Converts elements to int
+Instead of looping 5 times for 5 operations, it loop once.
+Eg.
+for(int num : nums){
+        count++;
+        sum =+ num;
+        min = Math.min(min, num);
+        max = Math.max(max, num)
+}
+
 mapToInt() -> Stream<Integer> to IntStream(Primitive Stream)
 
 OptionalDounblr -> Stream may be empty
