@@ -92,5 +92,92 @@ public class Collectors_Utility_Class {
                 // Min
                 Optional<Integer> min1 = nums.stream().collect(Collectors.minBy(Integer::compareTo));
                 int min = nums.stream().mapToInt(x -> x).min().orElse(0);
+
+                // groupingBy()
+                List<Employee> employees = List.of(
+                                new Employee("Mike", "IT", 6000),
+                                new Employee("Lucas", "IT", 3000),
+                                new Employee("Nancy", "HR", 8000),
+                                new Employee("Steve", "HR", 4000),
+                                new Employee("Billy", "HR", 4000),
+                                new Employee("Jane", "HR", 8000)
+
+                );
+
+                // Group Employess by Department
+                Map<String, List<Employee>> deptWiseGroup = employees.stream()
+                                .collect(Collectors.groupingBy(x -> x.getDepartment()));
+                // Map<String, List<Employee>> deptWiseGroup = employees.stream()
+                // .collect(Collectors.groupingBy(Employee::getDepartment));
+                System.out.println("Department wise Group: " + deptWiseGroup);
+
+                // Count Employees in each Department
+                Map<String, Long> countByDept = employees.stream()
+                                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting()));
+                System.out.println("Total Employees in each Department: " + countByDept);
+
+                // Max Salary in each Department
+                Map<String, Optional<Employee>> maxSalaryDeptWise = employees.stream()
+                                .collect(Collectors.groupingBy(
+                                                Employee::getDepartment,
+                                                Collectors.maxBy(Comparator.comparing(Employee::getSalary))));
+                System.out.println("Highest Salary in each Department: " + maxSalaryDeptWise);
+                // maxBy() returns Optional<Employee>
+
+                // Min Salary each Department
+                Map<String, Optional<Employee>> minSalaryEachDept = employees.stream()
+                                .collect(Collectors.groupingBy(Employee::getDepartment,
+                                                Collectors.minBy(Comparator.comparing(Employee::getSalary))));
+                System.out.println("Min Salary in each Department: " + minSalaryEachDept);
+
+                // All Employee names by Departments
+                Map<String, String> namesByDept = employees.stream()
+                                .collect(Collectors.groupingBy(
+                                                Employee::getDepartment,
+                                                Collectors.mapping(Employee::getName, Collectors.joining(", "))));
+                System.out.println("Comma separated Names by Department: " + namesByDept);
+                // .mapping() (Why?) -> By default Collectors collect whole employee object
+
+                // Get only Names of Employee per Department
+                Map<String, List<String>> listOfNamesByDept = employees.stream()
+                                .collect(Collectors.groupingBy(Employee::getDepartment,
+                                                Collectors.mapping(Employee::getName, Collectors.toList())));
+                System.out.println("List of Names by Department: " + listOfNamesByDept);
+
+                // Total Salary per Department
+                Map<String, Double> totalSalaryPerDept = employees.stream()
+                                .collect(Collectors.groupingBy(
+                                                Employee::getDepartment,
+                                                Collectors.summingDouble(Employee::getSalary)));
+                System.out.println("Total Salary per Department: " + totalSalaryPerDept);
+
+                // Average Salary in each Department
+                Map<String, Double> avgSalaryEachDept = employees.stream()
+                                .collect(Collectors.groupingBy(Employee::getDepartment,
+                                                Collectors.averagingDouble(Employee::getSalary)));
+                System.out.println("Avg Salary each Department: " + avgSalaryEachDept);
+
+                // Department wise Employee whose Salary > 5000
+                Map<String, Map<Boolean, List<Employee>>> deptWiseEmpSalaryGreaterThanFiveK = employees.stream()
+                                .collect(Collectors.groupingBy(Employee::getDepartment,
+                                                Collectors.partitioningBy(emp -> emp.getSalary() > 5000)));
+                System.out.println("Department wise Employee whose Salary greater than 5000: "
+                                + deptWiseEmpSalaryGreaterThanFiveK);
+
+                // Group by Department then by Salary
+                Map<String, Map<Double, List<Employee>>> sortedSalaryDeptWise = employees.stream()
+                                .collect(Collectors.groupingBy(Employee::getDepartment,
+                                                Collectors.groupingBy(Employee::getSalary)));
+                System.out.println("Group by Department then by Salary: " + sortedSalaryDeptWise);
+
+                // Group by Department then Sort by Salary
+                Map<String, List<Employee>> groupWiseSortedSalary = employees.stream()
+                                .collect(Collectors.groupingBy(Employee::getDepartment,
+                                                Collectors.collectingAndThen(Collectors.toList(),
+                                                                list -> list.stream()
+                                                                                .sorted(Comparator.comparing(
+                                                                                                Employee::getSalary))
+                                                                                .collect(Collectors.toList()))));
+                System.out.println("Group wise Sorted Salary: " + groupWiseSortedSalary);
         }
 }
