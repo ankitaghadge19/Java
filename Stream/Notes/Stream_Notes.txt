@@ -146,9 +146,22 @@ forEach() -> Doest Not Maintain Order
 *******************************Collectors Utility Class**********************************************
 
 Collectors.toList()
-Collectors.toSet()
-Collectors.toCollection(LinkedHashSet::new)
-Collectors.joining(delimiter:" ")
+          .toSet()
+          .toCollection(LinkedHashSet::new)
+          .joining(delimiter:" ")
+          .toMap()
+          .summarizingInt()
+          .summarizingDouble()
+          .summingInt()
+          .summingDouble()
+          .averagingInt()
+          .counting()
+          .maxBy()
+          .minBy()
+          .groupingBy()
+          .mapping()
+          .partitioningBy()
+          .collectingAndThen()
 
 Map<String, String> map = new HashMap<>(); -> Mutable
 Map<String, String> map = Map.of(); -> Immutable, Map.of() does not guarantee order
@@ -165,7 +178,24 @@ for(int num : nums){
 
 mapToInt() -> Stream<Integer> to IntStream(Primitive Stream)
 
-OptionalDounblr -> Stream may be empty
+OptionalDounble -> Stream may be empty
 max(), min(), average() -> In case of empty stream we cannot return 0, 
-                           As 0 might be actual valid vlaue in real data,
+                           As 0 might be actual valid value in real data,
                            So we return optional.
+
+            summing     vs   summarizing
+Returns -> (Only Sum)        (Returns count, sum, max, min, avg)
+
+* groupingBy() *        |     * partitioningBy() *
+Any No of Groups        |          Always 2
+Classifier Funstion     |    Predicate (true/false) (Boolean)
+                        |   Returns ( Map<Boolean, List<T>> )
+
+
+* filter() *            |      * partitioningBy() *
+Removes elements        |    Divids into two groups
+Returns Stream          |    Returns Map<Boolean, List<T>>
+
+.collectingAndThen() -> Collects the data(For Eg. Grouped Data) then perform operations
+
+
