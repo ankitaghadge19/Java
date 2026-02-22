@@ -14,7 +14,7 @@ public class Stream_Creation {
         Stream<Integer> stream1 = nums1.stream();
 
         // 2. Using Arrays
-        String[] fruits = {"Apple", "Banana", "Mango"};
+        String[] fruits = { "Apple", "Banana", "Mango" };
         Stream<String> stream2 = Arrays.stream(fruits);
 
         // 3. Using Stream.of()
@@ -22,8 +22,9 @@ public class Stream_Creation {
 
         // 4. Infinite Streams
         // generate() -> Sequence where each element does not depend on previous
-        Stream<Integer> generate = Stream.generate(() -> 1).limit(10);
-        System.out.println(generate.count());
+        Stream<Integer> generateInfiniteOne = Stream.generate(() -> 1).limit(10);
+        // System.out.println(generateInfiniteOne.count());
+        System.out.println(generateInfiniteOne.toList());
 
         // iterate() -> Sequence where each element depends on previous
         List<Integer> OneToFiftyNums = Stream.iterate(0, x -> x + 1).limit(50).collect(Collectors.toList());
