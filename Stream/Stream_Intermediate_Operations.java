@@ -33,20 +33,20 @@ public class Stream_Intermediate_Operations {
                                 .count();
 
                 names.stream()
-                        .filter(x -> x.startsWith("M"))
-                        .distinct()
-                        .forEach(x -> System.out.println(x));
-                        
-                names.stream()
-                        .filter(x -> x.startsWith("M"))
-                        .distinct()
-                        .toList();
+                                .filter(x -> x.startsWith("M"))
+                                .distinct()
+                                .forEach(x -> System.out.println(x));
 
-                // 5. limit() -> (Stateful Operations) 
+                names.stream()
+                                .filter(x -> x.startsWith("M"))
+                                .distinct()
+                                .toList();
+
+                // 5. limit() -> (Stateful Operations)
                 Stream<Integer> oneToFifty = Stream.iterate(1, x -> x + 1)
                                 .limit(50);
 
-                // 6. skip() -> (skip() based on count is Stateful Operations) 
+                // 6. skip() -> (skip() based on count is Stateful Operations)
                 Stream<Integer> elevenToFifty = Stream.iterate(1, x -> x + 1)
                                 .skip(10)
                                 .limit(50);
@@ -64,7 +64,7 @@ public class Stream_Intermediate_Operations {
                                 .peek(x -> System.out.println(x))
                                 .count();
                 System.out.println(filteredBankNames);
-      
+
                 // 9. flatMap()
                 // [rc1, [rc2, rc3]] -> [rc1, rc2, rc3]
                 // Flaten elements into single stream (One Level)
@@ -88,11 +88,17 @@ public class Stream_Intermediate_Operations {
 
                 // Multiple orders and each order has multiple items
                 List<List<String>> orders = List.of(
-                        List.of("Mouse", "Keyboard"),
-                        List.of("Mic", "Laptop Stand")
-                );
+                                List.of("Mouse", "Keyboard"),
+                                List.of("Mic", "Pendrive"),
+                                List.of("Pendrive", "Laptop Stand"));
                 List<String> allItems = orders.stream()
                                 .flatMap(x -> x.stream())
                                 .toList();
+                // Count requirement of particular item
+                Long pdCount = orders.stream()
+                                .flatMap(x -> x.stream())
+                                .filter(x -> x.equals("Pendrive"))
+                                .count();
+                System.out.println("Pendrive count: " + pdCount);
         }
 }
