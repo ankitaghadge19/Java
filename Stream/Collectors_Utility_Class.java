@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayDeque;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.IntSummaryStatistics;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -12,8 +13,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Collectors_Utility_Class {
         public static void main(String[] args) {
@@ -61,6 +64,7 @@ public class Collectors_Utility_Class {
                                 Map.of( // Immutable Map, Map.of() does not guarantee order
                                                 "Field1", "HSBC",
                                                 "Field2", "BANK"));
+                paymentFields.put("field3", "Pune");
                 String joinedString = paymentFields.values().stream()
                                 .collect(Collectors.joining(" "));
                 System.out.println(joinedString);
@@ -87,7 +91,10 @@ public class Collectors_Utility_Class {
 
                 // Max
                 Optional<Integer> max1 = nums.stream().collect(Collectors.maxBy(Integer::compareTo));
+                System.out.println(max1.get());
                 int max2 = nums.stream().mapToInt(x -> x).max().orElse(0);
+
+                nums.stream().findFirst().get();
 
                 // Min
                 Optional<Integer> min1 = nums.stream().collect(Collectors.minBy(Integer::compareTo));
@@ -158,11 +165,16 @@ public class Collectors_Utility_Class {
                 System.out.println("Avg Salary each Department: " + avgSalaryEachDept);
 
                 // Department wise Employee whose Salary > 5000
-                Map<String, Map<Boolean, List<Employee>>> deptWiseEmpSalaryGreaterThanFiveK = employees.stream()
+                Map<String, Map<Boolean, List<Employee>>> deptWiseEmpSalaryGreaterThanFiveK1 = employees.stream()
                                 .collect(Collectors.groupingBy(Employee::getDepartment,
                                                 Collectors.partitioningBy(emp -> emp.getSalary() > 5000)));
-                System.out.println("Department wise Employee whose Salary greater than 5000: "
-                                + deptWiseEmpSalaryGreaterThanFiveK);
+                Map<String, List<Employee>> deptWiseEmpSalaryGreaterThanFiveK2 = employees.stream()
+                                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors
+                                                .filtering(emp -> emp.getSalary() > 5000, Collectors.toList())));
+                System.out.println("Department wise Employee whose Salary greater than 5000 using .partitionBy(): "
+                                + deptWiseEmpSalaryGreaterThanFiveK1);
+                System.out.println("Department wise Employee whose Salary greater than 5000 using .filtering(): "
+                                + deptWiseEmpSalaryGreaterThanFiveK2);
 
                 // Group by Department then by Salary
                 Map<String, Map<Double, List<Employee>>> sortedSalaryDeptWise = employees.stream()
@@ -170,14 +182,42 @@ public class Collectors_Utility_Class {
                                                 Collectors.groupingBy(Employee::getSalary)));
                 System.out.println("Group by Department then by Salary: " + sortedSalaryDeptWise);
 
-                // Group by Department then Sort by Salary
+                // Group by Department then Sort by Salary using .sorted()
                 Map<String, List<Employee>> groupWiseSortedSalary = employees.stream()
-                                .collect(Collectors.groupingBy(Employee::getDepartment,
-                                                Collectors.collectingAndThen(Collectors.toList(),
-                                                                list -> list.stream()
-                                                                                .sorted(Comparator.comparing(
-                                                                                                Employee::getSalary))
-                                                                                .collect(Collectors.toList()))));
+                                .sorted(Comparator.comparing(Employee::getSalary))
+                                .collect(Collectors.groupingBy(Employee::getDepartment));
                 System.out.println("Group wise Sorted Salary: " + groupWiseSortedSalary);
+
+                List<String> banks = List.of("HSBC Bank", "CITI Bank", "SBI Bank", "COSMOS Bnak");
+
+                // Partition Banks whose length < 10
+                Map<Boolean, List<String>> banksLenLessThanThree = banks.stream()
+                                .collect(Collectors.partitioningBy(x -> x.length() < 10));
+                System.out.println("Banks Partition based on Length < 3: " + banksLenLessThanThree);
+
+                // Banks in uppercase using .map()
+                List<String> banksInUppercaseUsingMap = banks.stream().map(x -> x.toLowerCase()).toList();
+
+                // Mapping and Collecting using Collectors()
+                List<String> banksInUppercaseUsingMapping = banks.stream()
+                                .collect(Collectors.mapping(x -> x.toUpperCase(), Collectors.toList()));
+
+                Map<String, Set<String>> rulesAppliedTagWise = new HashMap<>();
+                rulesAppliedTagWise.put("F52", new TreeSet<>(Set.of("HK0001", "HK0002")));
+                rulesAppliedTagWise.put("F53", Set.of("HK0004", "HK0003"));
+                rulesAppliedTagWise.put("F54", Set.of("HK0006", "HK0005"));
+
+                // Make Group based on Country Code then Sort respective Rules
+                List<String> totalRulesTriggered = List.of("HK0004", "HK0002", "HK0003", "AU0006", "AU0007");
+                // Unsorted
+                Map<String, Set<String>> totalRulesTriggeredUnsorted = totalRulesTriggered.stream()
+                                .collect(Collectors.groupingBy(rule -> rule.substring(0, 2),
+                                                Collectors.toSet()));
+                System.out.println("Total Rules Triggered in Unsorted: " + totalRulesTriggeredUnsorted);
+                // Sorted
+                Map<String, Set<String>> totalRulesTriggeredSorted = totalRulesTriggered.stream()
+                                .collect(Collectors.groupingBy(rule -> rule.substring(0, 2),
+                                                Collectors.toCollection(TreeSet::new)));
+                System.out.println("Total Rules Triggered in Sorted: " + totalRulesTriggeredSorted);
         }
 }
