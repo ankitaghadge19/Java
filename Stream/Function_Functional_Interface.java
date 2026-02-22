@@ -13,7 +13,7 @@ public class Function_Functional_Interface {
         int result1 = twice.andThen(triple).apply(20); // (20 * 2) * 3
         System.out.println(result1); 
 
-        // Parameterized function will be xecuted before firts one
+        // Parameterized function will be executed before first one
         int result2 = twice.compose(triple).apply(20); // 20 * (2 * 3)
         System.out.println(result2);
 
