@@ -1,0 +1,118 @@
+.stream()
+
+Q. Create List -> [ list.of() ]
+
+Q. Print List -> [ .forEach() , .toList(), .collect(Collectors.toList()) ]
+
+Q. String with length > 3 -> [ .filter() ]
+
+Q. Square and Sort -> [ .map() , .sorted() ]
+
+Q. Sum of all elements -> [ .reduce() ]
+
+Q. Create list of 1 to 20 -> [ .iterate(), .limit() ]
+
+Q. Find total sum of factorial(Independent Opertion) of nums 1 to 50 -> [ .parallelStream(), .sum() ]
+
+Q. Print factorial of 1 to 50 in order -> [ .parallelStream(), .map(), .toList() / .forEachOrdered()]
+
+Q. Find cumulative sum(Dependent Opeartion) -> [ AtomicInteger, .stream(), .map( ::addAndGet), .toList() ]
+
+Q. Convert bank Names to uppercase then find names which contains CHINA -> [ .map(), .filter() ]
+
+Q. Count occurances of particular chars -> [ .filter(). .count() ]
+
+Q. Count occurances of each chars -> [ .chars(), Collectors.groupingBy(), Collectors.counting() ]
+
+Q. Count occurance of each word -> [ .split(), Collectors.groupingBy(), Collectors.counting() ]
+
+Q. Partition even and odd values -> [ Collectors.partitionBy() ]
+
+Q. Partition bank names whose length > 10 -> [ Collectors.partitionBy() ]
+
+Q. Sum of all map values -> [ .reduce(), .sum()]
+
+Q. Create map from list -> [ Collectors.toMap() ]
+
+Q. Filter words starstWith particular alphabet -> [ .filter(), startsWith() ]
+
+Q. Convert words into uppercase -> [ .map(), .toUppercase() ]
+
+Q. Sort nums in ascending order -> [ .sorted() ]
+
+Q. Find distinct elements -> [ .distinct ]
+
+Q. Skip numbers -> [ .skip() ]
+
+Q. Count nums <10 and also print nums (Debug) -> [ .peek() , .count()]
+
+Q. Map.of(field -> returnCode)
+   Check if UIReturnCode is applied or not? -> [ .flatMap(), .anyMatch() ]
+
+Q  Multiple orders and each order contains multiple items
+   Count requirement of particular item -> [ flatMap(), filter(), .equals(), count() ]
+
+Q. Check whether any even num in list -> [ .anyMatch() ]
+
+Q. Check whether all nums > 0 -> [ .allMatch() ]
+
+Q. Check whether none of the num < 0 -> [ .noneMatch() ] 
+
+Q. Given a comma-separated string of numbers, count the total numbers -> [ split(), .map( .trim() ), .map( Integer.parseInt() ), .count(), .toList() ]
+
+Q. Convert words into alphabets -> [ .toCharArray() ]
+
+Q. Find max num -> [ .collect(Collectors.maxBy(Integer::compareTo)) ] (Returns Optional) / [ .mapToInt(x -> x), .max() ]
+
+Q. Find min num -> [ .colect(Collectors.minBy(Integer::compareTo)) ] (Returns Optional) / [ .mapToInt(x -> x), .min() ]
+
+Q. Find average -> [ .collect(Collectors.averagingInt(x -> x)) ] / [ .mapToInt(x -> x), .average() ]
+
+Q. Find sum -> [ .collect(Collectors.summingInt(x -> x))] / [ .mapToInt(x -> x), .sum() ]
+
+Q. Find count -> [ .collect(Collectors.counting()) ] / [ .mapToInt(x -> x), .count() ] 
+
+Q. Create list of 1 50times -> [ .generate(), .limit() ]
+
+Q. Create stream of:
+        Arrays -> Arrays.stream(String[] arr)
+        List -> List.stream()
+
+Q. List has duplicate nums, create unique list -> [ .collect(Collectors.toSet()) ]
+
+Q. All triggred rules contains duplicate, return uniques rules maintain order -> [ .collect(Collectors.toCollection(LinkedHashSet::new)) ]
+
+Q. (List -> map) Given list of return codes where each return code has (id, name, description).
+   Create map of (id -> Return Code Object) -> [ .collect(Collectors.toMap(key, value)) ] 
+
+Q. Join free text field values by space -> [ .collect(Collectors.joining(" ")) ]
+   Eg. (field1 -> HSBC, field2 -> BANK)
+
+-> Employee(name, department, salary)
+
+Q. Group employess by department -> [ .collect(Collectors.groupingBy(Employee::getDepartment)) ]
+
+Q. Count total employess in each department -> [ Collectors.groupingBy(),  Collectors.counting() ]
+
+Q. Max salary in each department -> [ Collectors.groupingBy(), Collectors.maxBy() ]
+
+Q. Min salary in each department -> [ Collectors.groupingBy(), Collectors.minBy() ]
+   
+Q. Group employess by department and create comma separated list of employee names -> [ Collectors.groupingBy(), Collectors.mapping(), Collectors.joining()]
+
+Q. List of names of employee per department -> [ Collectors.groupingBy(), Collectors.mapping(), Collectors.toList() ]
+
+Q. Total salary of employee per department -> [ Collectors.groupingBy(), Collectors.summingDouble() ]
+
+Q. Average salary in each department -> [ Collectors.groupingBy(), Collectors.averagingDouble() ]
+
+Q. Group by department then print employess whose salary > 5000 -> [ Collectors.groupingBy(), Collectors.filtering(), Collectors.toList() ]
+
+Q. Group by department and then by salary -> [ Collectors.groupingBy() ]
+
+Q. Group by department then sort by salary -> [ .sorted(Comparator.comparing()) Collectors.groupingBy() ]
+
+Q. Group by country codes then sort rules -> [ Collectors.groupingBy(), .subString(), Collectors.toCollection(TreeSet::new) ]
+   Eg. TrigerredRules = ["HK0004", "HK0002", "AU0006", "AU0007"]
+
+
