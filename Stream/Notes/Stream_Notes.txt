@@ -162,6 +162,8 @@ Collectors.toList()
           .mapping()
           .partitioningBy()
           .collectingAndThen()
+          .toCollection()
+          .toMap()
 
 Map<String, String> map = new HashMap<>(); -> Mutable
 Map<String, String> map = Map.of(); -> Immutable, Map.of() does not guarantee order
@@ -198,4 +200,12 @@ Returns Stream          |    Returns Map<Boolean, List<T>>
 
 .collectingAndThen() -> Collects the data(For Eg. Grouped Data) then perform operations
 
+.toMap(key, value) ( List -> Map )
+
+.boxed() -> Converts Primitive to Stream of wrapper objects 
+IntStream   →   Stream<Integer>
+
+.sorted() ->
+.compareTo() -> Natural Ordering
+Comparator.comparing() -> Custom Sorting
 
