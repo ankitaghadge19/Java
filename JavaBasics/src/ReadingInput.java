@@ -10,8 +10,8 @@ public class ReadingInput {
         // .next() -> Skips leading white spaces, new line or tabs
         //            Stop reading as soon as it sees space, new line or tab.
         System.out.print("Enter First Name: ");
-        String name = sc.next();
-        System.out.println("Your First Name: " + name);
+        String firstName = sc.next();
+        System.out.println("Your First Name: " + firstName);
 
         // .next() stops before new line and leaves it in buffer, while nextLine() stops after new line
         sc.nextLine();
