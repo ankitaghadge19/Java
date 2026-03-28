@@ -1,6 +1,10 @@
 public class Constants {
     // This variables should be declared inside class but outside method
-    public static final int timeout = 4;
+    // Constants (Uppercase)
+    public static final int TIMEOUT = 4;
+    public static final String PREFIX = "gpe.";
+    public static final String GLOBAL_ENTITY_MAP = PREFIX + "global_entity_map";
+    public static final String ENTITY_MAP = PREFIX + "entity_map";
 
     public static void main() {
         // Cannot modify final value
